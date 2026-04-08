@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Smart Complaint Portal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Dashboard Navigation -->
+  <nav class="lp-navbar glass-card" style="margin-bottom: 2rem; background: rgba(30,41,59,0.8);">
+    <div class="lp-brand">
+      <div class="brand-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+      <div class="brand-text">
+        <span class="title">Smart Complaint Dashboard</span>
+      </div>
+    </div>
+    <div class="lp-nav-actions">
+      <button class="btn btn-outline" style="border: none;" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+    </div>
+  </nav>
+
+  <main class="dashboard-container" style="max-width: 1200px;">
+    <!-- Submission Form -->
+    <div class="glass-card submit-card" style="height: fit-content;">
+      <div class="card-header" style="text-align: left;">
+        <div class="badge"><i class="fa-solid fa-pen-to-square"></i> New Request</div>
+        <h3>Submit a New Complaint</h3>
+        <p>Your issue will be routed directly to the appropriate department for rapid resolution.</p>
+      </div>
+
+      <div class="form-group row">
+        <label for="category">Category</label>
+        <div class="icon-input-wrapper" style="position: relative;">
+          <i class="fa-solid fa-layer-group" style="position: absolute; left: 15px; top: 15px; color: #64748b;"></i>
+          <select id="category" style="padding-left: 45px;">
+            <option value="" disabled selected>Select Category...</option>
+            <option value="Road">Road infrastructure</option>
+            <option value="Water">Water Supply & Plumbing</option>
+            <option value="Electricity">Electricity & Power</option>
+            <option value="Internet">Internet & Connectivity</option>
+            <option value="Other">Other Campus Facility</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="description">Issue Description</label>
+        <textarea id="description" rows="5" placeholder="Please describe the issue in detail. Include location or any specific identifiers..."></textarea>
+      </div>
+
+      <button class="btn btn-primary" style="width: 100%; padding: 1rem;" onclick="createComplaint()">
+        <i class="fa-solid fa-paper-plane"></i> Submit Formal Complaint
+      </button>
+    </div>
+
+    <!-- Tracking List -->
+    <div class="glass-card complaints-card">
+      <div class="card-header" style="text-align: left; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h3>Track Progress</h3>
+          <p>Monitor your active and past resolutions in real-time.</p>
+        </div>
+        <button class="btn btn-outline" style="padding: 0.5rem 1rem;" onclick="fetchComplaints()">
+          <i class="fa-solid fa-rotate-right"></i> Refresh
+        </button>
+      </div>
+      
+      <div id="list" class="complaints-list">
+        <!-- populated by script.js -->
+        <div style="text-align: center; color: #94a3b8; padding: 2rem;">
+          <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+          <p style="margin-top: 1rem;">Loading your complaints...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
